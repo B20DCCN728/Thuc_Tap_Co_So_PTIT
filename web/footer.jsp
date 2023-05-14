@@ -76,8 +76,8 @@
               <div>
                   <h3 class="footer__heading">Liên hệ</h3>
                   <ul class="footer-list">
-                      <li class="footer-item"><span class="footer-item__info">Hotline: 0337176055</span></li>
-                      <li class="footer-item"><span class="footer-item__info">Email: nvit80@gmail.com</span></li>
+                      <li class="footer-item"><span class="footer-item__info">Hotline: campus77</span></li>
+                      <li class="footer-item"><span class="footer-item__info">Email: campus@gmail.com</span></li>
                       <li class="footer-item"><span class="footer-item__info">Địa chỉ Showroom 1: Tòa Capital Place, số 29 Liễu Giai, Ngọc Khánh, Ba Đình, Hà Nội</span></li>
                       <li class="footer-item"><span class="footer-item__info">Địa chỉ Showroom 2: 249 Xã Đàn, Đống Đa, Hà Nội</span></li>
                       <li class="footer-item"><span class="footer-item__info">Địa chỉ Showroom 3: Tòa BMM, KM2, Phúc La, Hà Đông, Hà Nội</span></li>
@@ -95,7 +95,7 @@
 
           </div> 
           <div class="grid__row footer-bottom">
-            <span class="footer-bottom__left">Copyright © 2023 Mygroup Tech.,JSC</span>
+            <span class="footer-bottom__left">Copyright © 2023 Campus PTIT.,JSC</span>
             <div class="footer-bottom__right">
               <i class="footer-bottom__icon fa-brands fa-cc-visa"></i>
               <i class="footer-bottom__icon fa-brands fa-cc-paypal"></i>

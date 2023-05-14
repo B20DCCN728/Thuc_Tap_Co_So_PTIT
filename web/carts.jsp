@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- meta configuration -->
+  <!-- meta configuration -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,22 +16,24 @@
       <!-- link set standard page-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
       <!-- link css styles -->
-        <link rel="stylesheet" href="./Styles/base.css">
-        <link rel="stylesheet" href="./Styles/header.css">
-        <link rel="stylesheet" href="./Styles/carts.css"/>
-        <link rel="stylesheet" href="./Styles/footer.css">
+      <link rel="stylesheet" href="./Styles/base.css">
+      <link rel="stylesheet" href="./Styles/carts.css"/>
+      <link rel="stylesheet" href="./Styles/header.css">
+      <link rel="stylesheet" href="./Styles/footer.css">
       <!-- icon -->
-      <link rel="icon" href="/Web Pages/imgs/pmc.png">
+      <link rel="icon" href="./imgs/pmc.png">
       <!-- font download -->
       <link rel="stylesheet" href="./fontawesome-free-6.4.0-web/css/all.min.css"> 
       <!-- font -->
       <link rel="preconnect" href="https://fonts.googleapis.com"> 
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- title -->
 
-    <!-- JavaScript -->
-    <title>Nguyen Hoang Viet</title>
+    <!-- title -->
+    <title>Shoes Store</title>
+
+    <!--Ajax-->
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
 </head>
 <body>
     <div class="app">
