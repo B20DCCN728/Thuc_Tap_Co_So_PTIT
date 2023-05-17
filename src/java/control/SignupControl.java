@@ -1,13 +1,14 @@
 //Created by Campus
 package control;
 
-import DAO.AccountDAO;
+import DAO.ClientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Client;
 
 /**
  *
@@ -20,18 +21,30 @@ public class SignupControl extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         
+        String fullName = request.getParameter("fullName");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String address = request.getParameter("address");
+        String phoneNumber = request.getParameter("phoneNumber");
         
-        AccountDAO accountDAO = new AccountDAO();
+        ClientDAO clientDAO = new ClientDAO();
         
-        if(!accountDAO.checkAccountExist(username)) {
-            if(accountDAO.registerAccount(username, password)) {
+        if(!clientDAO.checkAccountExist(username)) {
+            
+            Client client = new Client();
+            client.setFullName(fullName);
+            client.setUsername(username);
+            client.setPassword(password);
+            client.setAddress(address);
+            client.setPhoneNumber(phoneNumber);
+            
+            if(clientDAO.registerAccount(client)) {
                 response.getWriter().write("success");
-            } else {
+            } else {    
                 response.getWriter().write("error");
             }
-        } else {
+        } 
+        else {
             response.getWriter().write("exist"); 
         }
         

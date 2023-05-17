@@ -20,7 +20,7 @@
                   <div class="grid__row-propose">
                     <c:forEach items="${proposeList}" var="o">
                     <div class="grid__column-2-1">
-                      <a class="home-product-item" href="ProductDetailControl?productID=${o.ID}">  
+                      <a class="home-product-item" href="productdetail?productID=${o.ID}">  
                         <!-- Product img -->
                         <div class="home-product-item__img" style="background-image: url(${o.imgLink1})"></div>
                         <!-- Title -->

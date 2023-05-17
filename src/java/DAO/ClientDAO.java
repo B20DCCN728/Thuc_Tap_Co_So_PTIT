@@ -1,23 +1,21 @@
-//Creadted by Campus
+//Created by Campus
 package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Account;
+import model.Client;
 
-public class AccountDAO extends DBConnection {
+public class ClientDAO {
     
     Connection connection = null;
     ResultSet result = null;
     PreparedStatement preS = null;
     
-    public Account checkLogin(String username, String password) {
-        Account myAccount = null;
+    public Client checkLogin(String username, String password) {
+        Client myAccount = null;
         
-        String query = "SELECT * FROM [Wish].[dbo].[Account] WHERE [user] = ? AND [pass] = ? ;";
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblClients] WHERE [username] = ? AND [password] = ? ;";
         
         try {
             connection = new DBConnection().getConnection();
@@ -26,12 +24,13 @@ public class AccountDAO extends DBConnection {
             preS.setString(2, password);           
             result = preS.executeQuery();
             if(result.next()){       
-                myAccount = new Account(
-                        result.getInt(1),
-                        result.getString(2), 
-                        result.getString(3), 
-                        result.getInt(4)
-                ); 
+                myAccount = new Client ();
+                myAccount.setId(result.getInt(1));
+                myAccount.setFullName(result.getString(2));
+                myAccount.setUsername(result.getString(3));
+                myAccount.setPassword(result.getString(4));
+                myAccount.setAddress(result.getString(7));
+                myAccount.setPhoneNumber(result.getString(7));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +40,7 @@ public class AccountDAO extends DBConnection {
     
     public boolean checkAccountExist(String username) {
         
-        String query = "SELECT * FROM [Wish].[dbo].[Account] WHERE [user] = ?";
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblClients] WHERE [username] = ?";
         
         try {
             connection = new DBConnection().getConnection();
@@ -58,15 +57,20 @@ public class AccountDAO extends DBConnection {
         return false;
     }
     
-    public boolean registerAccount(String username, String password) {
+    public boolean registerAccount(Client client) {
 
-        String query = "INSERT INTO [Wish].[dbo].[Account] values(?, ?, 0);";
+        String query = "INSERT INTO [Thuc_Tap_Co_So].[dbo].[tblClients] values(?, ?, ?, null, ?, ?);";
+        
+        System.out.println(client);
         
         try {
             connection = new DBConnection().getConnection();
             preS = connection.prepareStatement(query);
-            preS.setString(1, username);
-            preS.setString(2, password);           
+            preS.setString(1, client.getFullName());
+            preS.setString(2, client.getUsername());
+            preS.setString(3, client.getPassword());    
+            preS.setString(4, client.getAddress()); 
+            preS.setString(5, client.getPhoneNumber()); 
             preS.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -74,5 +78,4 @@ public class AccountDAO extends DBConnection {
             return false;
         }       
     }
-    
 }

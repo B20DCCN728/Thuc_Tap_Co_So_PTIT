@@ -24,11 +24,7 @@ public class HomeControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ArrayList<Product> listProduct = new ProductDAO().getAllProducts();
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
-
-        for (int i = 0; i < listProduct.size(); i++) {
-            System.out.println(listProduct.get(i));
-        }
-
+        
         request.setAttribute("listProduct", listProduct);
         request.setAttribute("listCategory", listCategory);
         

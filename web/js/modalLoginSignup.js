@@ -84,9 +84,14 @@ function callLoginServlet() {
 
 //When the user click the button Signup
 function callSignupServlet() {
+    var fullName = document.getElementById("auth-form__signup-fullname").value;
     var username = document.getElementById("auth-form__signup-username").value;
     var password = document.getElementById("auth-form__signup-password").value;
     var repassword = document.getElementById("auth-form__signup-repassword").value;
+    var address = document.getElementById("auth-form__signup-address").value;
+    var phoneNumber = document.getElementById("auth-form__signup-phonenumber").value;
+    
+    
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -105,7 +110,7 @@ function callSignupServlet() {
     
     xhttp.open("POST", "SignupControl", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("username=" + username + "&password=" + password);
+    xhttp.send("username=" + username + "&password=" + password + "&fullName=" + fullName + "&address=" + address + "&phoneNumber=" + phoneNumber);
 }
 
 //When the user clicks the search icon
@@ -113,5 +118,10 @@ function callSearchServlet() {
     var searchContent = document.getElementById("searchContent").value;
     var content = "./SearchProductControl?searchContent=" + searchContent;
     window.location.href = content;
+}
+
+//When the user clicks the search add to cart
+function callViewCarts() {
+    window.location.href = "./carts";
 }
 

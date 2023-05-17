@@ -75,7 +75,12 @@
 .carts-item__delete-icon {
   font-size: 3rem;
   color: rgb(227, 66, 41);
+  cursor: pointer;
 }
+
+.carts-item__delete-icon:hover {
+  color: rgb(175, 34, 12);
+} 
 
 /* Carts payment */
 .carts-payment {
@@ -115,4 +120,8 @@
   background-color: var(--primary-color);
   color: var(--white-color);
   font-size: 1.4rem;
+}
+
+.carts-payment__detail-submit:hover {
+    background-color: var(--primary-color-hover);
 }

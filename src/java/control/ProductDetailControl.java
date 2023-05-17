@@ -11,8 +11,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import model.BoughtProduct;
 import model.Category;
+import model.Client;
 import model.Comment;
 import model.Product;
 
@@ -34,7 +37,7 @@ public class ProductDetailControl extends HttpServlet {
         Product product = new ProductDAO().getProductByID(productID);
         ArrayList<Product> listTop2Propose = new ProductDAO().getPropose2Product(product.getID(), product.getCategory().getId());
         ArrayList<Comment> listComment = new CommentDAO().getCommentbyProductID(productID);
-               
+        
         request.setAttribute("proposeList", listTop2Propose);
         request.setAttribute("product", product);
         request.setAttribute("listCategory", listCategory);
@@ -68,7 +71,35 @@ public class ProductDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        System.out.println("Do Post was called");
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession mySession = request.getSession();
+        
+        Client myAccount = (Client) mySession.getAttribute("myAccount");
+        
+        if(myAccount != null) {  
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            System.out.println(productID + " " + quantity);
+            ArrayList<BoughtProduct> listCart = null;
+            listCart = (ArrayList<BoughtProduct>) mySession.getAttribute("listCart");
+            if(listCart == null) {
+                listCart = new ArrayList<>();
+            }
+            BoughtProduct newProduct = new BoughtProduct();
+            newProduct.setProduct(new ProductDAO().getProductByID(productID));
+            newProduct.setQuantity(quantity);
+            listCart.add(newProduct);
+            System.out.println(newProduct.getQuantity());
+             System.out.println(listCart);
+            mySession.setAttribute("listCart", listCart);
+            response.getWriter().write("success");
+        }
+        else {
+            response.getWriter().write("notLogin");
+        }
     }
 
     /**

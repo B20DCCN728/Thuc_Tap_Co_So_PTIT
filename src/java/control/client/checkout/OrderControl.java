@@ -1,20 +1,23 @@
 //Created by Campus
-package control;
+package control.client.checkout;
 
+import DAO.OrderDAO;
+import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Client;
+import model.Order;
 
 /**
  *
- * @author CAMPUS ETH
+ * @author PC
  */
-@WebServlet()
-public class CartsControl extends HttpServlet {
+public class OrderControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,16 +31,16 @@ public class CartsControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = request.getParameter("");
+        String url = "/orders.jsp";
         
-        switch (request) {
-            case "":
-                
-                break;
-            default:
-                throw new AssertionError();
+        HttpSession mySession = request.getSession();
+        Client myAccount = (Client) mySession.getAttribute("myAccount");
+        if(myAccount != null) {
+            ArrayList<Order> listOrder = new OrderDAO().getOrderByClientID(myAccount.getId());
+            request.setAttribute("listOrder", listOrder);
         }
         
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

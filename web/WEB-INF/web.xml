@@ -8,7 +8,7 @@
         <servlet-name>CategoryControl</servlet-name>
         <servlet-class>control.CategoryControl</servlet-class>
     </servlet>
-<!--    <servlet>
+    <!--    <servlet>
         <servlet-name>ProductDetailControl</servlet-name>
         <servlet-class>control.ProductDetailControl</servlet-class>
     </servlet>-->
@@ -38,9 +38,20 @@
     </servlet>
     <servlet>
         <servlet-name>CartsControl</servlet-name>
-        <servlet-class>control.CartsControl</servlet-class>
+        <servlet-class>control.client.checkout.CartsControl</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>SendCommentControl</servlet-name>
+        <servlet-class>control.SendCommentControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveProduct</servlet-name>
+        <servlet-class>control.RemoveProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderControl</servlet-name>
+        <servlet-class>control.client.checkout.OrderControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeControl</servlet-name>
         <url-pattern>/HomeControl</url-pattern>
@@ -49,7 +60,7 @@
         <servlet-name>CategoryControl</servlet-name>
         <url-pattern>/CategoryControl</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>
+    <!--    <servlet-mapping>
         <servlet-name>ProductDetailControl</servlet-name>
         <url-pattern>/ProductDetailControl</url-pattern>
     </servlet-mapping>-->
@@ -79,11 +90,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartsControl</servlet-name>
-        <url-pattern>/CartsControl</url-pattern>
+        <url-pattern>/carts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendCommentControl</servlet-name>
+        <url-pattern>/sendCmt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveProduct</servlet-name>
+        <url-pattern>/remove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderControl</servlet-name>
+        <url-pattern>/orders</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 </web-app>

@@ -7,7 +7,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
       <header class="header">
         <!-- grid --> 
         <div class="grid">
@@ -19,13 +18,13 @@
                 Vào cửa hàng Shoes Store Online
                 <!-- Header QR code -->
                 <div class="header__qr">
-                  <img src="./imgs/qr.png" alt="QR code" class="header__qr-img">
+                  <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/qr.png" alt="QR code" class="header__qr-img">
                   <div class="header__qr-apps">
                     <a href="https://www.forexfactory.com/" class="header__qr-link">
-                      <img src="./imgs/appstore.png" alt="App Store" class="header__qr-download-img">
+                      <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/appstore.png" alt="App Store" class="header__qr-download-img">
                     </a>
                     <a href="https://docs.google.com/spreadsheets/d/16ByD37z7RyU_BakwA6hk_jC6su5292X_iYZhclb_ny0/edit#gid=1802802883" class="header__qr-link">
-                      <img src="./imgs/googleplay.png" alt="Google Play" class="header__qr-download-img">
+                      <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/googleplay.png" alt="Google Play" class="header__qr-download-img">
                     </a>
                   </div>
                 </div>
@@ -55,7 +54,7 @@
                   <ul class="header__notify-list">
                     <li class="header__notify-item header__notify-item--viewed">
                       <a href="" class="header__notify-link">
-                        <img src="./imgs/doraemon_1.jpg" alt="" class="header__notify-img">
+                        <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/doraemon_1.jpg" alt="" class="header__notify-img">
                         <div class="header__notify-info">
                           <span class="header__notify-name">Hiện tại đơn hàng của bạn đã bị xóa khỏi cơ sở dữ liệu, bạn có muốn khôi phục nó không?</span>
                           <span class="header__notify-description">Mặt hàng này hiện đã hết</span>
@@ -64,7 +63,7 @@
                     </li>  
                     <li class="header__notify-item header__notify-item--viewed">
                       <a href="" class="header__notify-link">
-                        <img src="./imgs/doraemon_2.jpg" alt="" class="header__notify-img">
+                        <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/doraemon_2.jpg" alt="" class="header__notify-img">
                         <div class="header__notify-info">
                           <span class="header__notify-name">Doraemon chapter 100</span>
                           <span class="header__notify-description">Mặt hàng này hiện đã hết</span>
@@ -73,7 +72,7 @@
                     </li>  
                     <li class="header__notify-item">
                       <a href="" class="header__notify-link">
-                        <img src="./imgs/doraemon_1.jpg" alt="" class="header__notify-img">
+                        <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/doraemon_1.jpg" alt="" class="header__notify-img">
                         <div class="header__notify-info">
                           <span class="header__notify-name">Doraemon chapter 100</span>
                           <span class="header__notify-description">Mặt hàng này hiện đã hết</span>
@@ -82,7 +81,7 @@
                     </li>  
                     <li class="header__notify-item">
                       <a href="" class="header__notify-link">
-                        <img src="./imgs/doraemon_1.jpg" alt="" class="header__notify-img">
+                        <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/doraemon_1.jpg" alt="" class="header__notify-img">
                         <div class="header__notify-info">
                           <span class="header__notify-name">Doraemon chapter 100</span>
                           <span class="header__notify-description">Mặt hàng này hiện đã hết</span>
@@ -110,8 +109,8 @@
               <!-- Already Login -->
               <c:if test="${sessionScope.myAccount != null}" >
                <li class="header__navbar-item header__navbar-user">
-                <img src="./imgs/avatar.jpg" alt="avatar" class="header__navbar-user-avatar">
-                <span class="header__navbar-username">${sessionScope.myAccount.username}</span>
+                <img src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/avatar.jpg" alt="avatar" class="header__navbar-user-avatar">
+                <span class="header__navbar-username">${sessionScope.myAccount.fullName}</span>
                 <ul class="header__navbar-user-menu">
                   <li class="header__navbar-user-item">
                     <a href="" class="header__navbar-user-item-link">
@@ -120,7 +119,7 @@
                     </a>
                   </li>
                   <li class="header__navbar-user-item">
-                    <a href=""  class="header__navbar-user-item-link">
+                    <a href="orders"  class="header__navbar-user-item-link">
                       <i class="header__navbar-user-icon fa-solid fa-bag-shopping"></i>
                       <span>Đơn hàng đã mua</span>
                     </a>
@@ -191,7 +190,7 @@
             </div>
 
             <div class="header__cart">
-              <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
+              <i onclick="callViewCarts()" class="header__cart-icon fa-solid fa-cart-shopping"></i>
             </div>
           </div>
         </div>

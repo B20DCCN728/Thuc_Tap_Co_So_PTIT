@@ -54,35 +54,23 @@
                       <th class="orders-item__title">Ngày mua</th>
                       <th class="orders-item__title">Xem chi tiết</th>
                   </tr>
+                  <c:forEach items="${listOrder}" var="order">
                   <tr class="orders-item__list">
                       <td class="orders-item">
-                          1234
+                          ${order.id}
                           <!-- <img src="/Web Pages/imgs/mrstev3.jpg"  alt="Hàng Xịn" class="orders-item__img"> -->
                       </td>
-                      <td class="orders-item">Mr.Stev3 HC</td>
-                      <td class="orders-item"><span class="orders-item__quantity">12</span></td>
-                      <td class="orders-item">1.200.000₫</td>
-                      <td class="orders-item">20.000.000₫</td>
+                      <td class="orders-item">${order.quantity}</td>
+                      <td class="orders-item"><span class="orders-item__quantity">${order.totalCost}₫</span></td>
+                      <td class="orders-item">Hoàn Thành</td>
+                      <td class="orders-item">${order.createdDate}</td>
                       <td class="orders-item orders-item__delete">
                         <a href="" class="orders-item__delete-active">
-                          <i class="orders-item__delete-icon fa-solid fa-trash"></i>
+                          <i class="orders-item__delete-icon fa-solid fa-circle-info"></i>
                         </a>
                       </td> 
                     </tr>
-                  <tr class="orders-item__list">
-                      <td class="orders-item">
-                          <img src="https://myshoes.vn/image/cache/catalog/2023/nike/nk08/giay-nike-air-zoom-pegasus-40-nam-den-trang-01-500x500.jpg"  alt="Hàng Xịn" class="orders-item__img">
-                      </td>
-                      <td class="orders-item">Mr.Stev3 HC</td>
-                      <td class="orders-item"><span class="orders-item__quantity">12</span></td>
-                      <td class="orders-item">1.200.000₫</td>
-                      <td class="orders-item">20.000.000₫</td>
-                      <td class="orders-item orders-item__delete">
-                        <a href="" class="orders-item__delete-active">
-                          <i class="orders-item__delete-icon fa-solid fa-trash"></i>
-                        </a>
-                      </td>
-                  </tr>
+                  </c:forEach>
               </table>
             </div>
           </div>

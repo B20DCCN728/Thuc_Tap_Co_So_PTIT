@@ -3,7 +3,7 @@
     Created on : May 10, 2023, 9:26:23 AM
     Author     : PC
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,14 +16,14 @@
       <!-- link set standard page-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
       <!-- link css styles -->
-      <link rel="stylesheet" href="./Styles/base.css">
-      <link rel="stylesheet" href="./Styles/carts.css"/>
-      <link rel="stylesheet" href="./Styles/header.css">
-      <link rel="stylesheet" href="./Styles/footer.css">
+      <link rel="stylesheet" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/Styles/base.css">
+      <link rel="stylesheet" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/Styles/carts.css"/>
+      <link rel="stylesheet" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/Styles/header.css">
+      <link rel="stylesheet" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/Styles/footer.css">
       <!-- icon -->
-      <link rel="icon" href="./imgs/pmc.png">
+      <link rel="icon" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/imgs/pmc.png">
       <!-- font download -->
-      <link rel="stylesheet" href="./fontawesome-free-6.4.0-web/css/all.min.css"> 
+      <link rel="stylesheet" href="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/fontawesome-free-6.4.0-web/css/all.min.css"> 
       <!-- font -->
       <link rel="preconnect" href="https://fonts.googleapis.com"> 
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,45 +55,35 @@
                             <th class="carts-item__title">Tổng cộng</th>
                             <th class="carts-item__title">Xóa sản phẩm</th>
                         </tr>
-                        <tr class="carts-item__list">
-                            <td class="carts-item">
-                                <img src="/Web Pages/imgs/mrstev3.jpg"  alt="Hàng Xịn" class="carts-item__img">
-                            </td>
-                            <td class="carts-item">Mr.Stev3 HC</td>
-                            <td class="carts-item"><span class="carts-item__quantity">12</span></td>
-                            <td class="carts-item">1.200.000₫</td>
-                            <td class="carts-item">20.000.000₫</td>
-                            <td class="carts-item carts-item__delete">
-                              <a href="" class="carts-item__delete-active">
-                                <i class="carts-item__delete-icon fa-solid fa-trash"></i>
-                              </a>
-                            </td>
-                          </tr>
-                        <tr class="carts-item__list">
-                            <td class="carts-item">
-                                <img src="https://myshoes.vn/image/cache/catalog/2023/nike/nk08/giay-nike-air-zoom-pegasus-40-nam-den-trang-01-500x500.jpg"  alt="Hàng Xịn" class="carts-item__img">
-                            </td>
-                            <td class="carts-item">Mr.Stev3 HC</td>
-                            <td class="carts-item"><span class="carts-item__quantity">12</span></td>
-                            <td class="carts-item">1.200.000₫</td>
-                            <td class="carts-item">20.000.000₫</td>
-                            <td class="carts-item carts-item__delete">
-                              <a href="" class="carts-item__delete-active">
-                                <i class="carts-item__delete-icon fa-solid fa-trash"></i>
-                              </a>
-                            </td>
-                        </tr>
+                        <c:if test="${listCart != null}">
+                            <c:forEach items="${listCart}" var="c" varStatus="status">
+                            <tr class="carts-item__list">
+                                <td class="carts-item">
+                                    <img src="${c.product.imgLink1}"  alt="Hàng Xịn" class="carts-item__img">
+                                </td>
+                                <td class="carts-item">${c.product.name}</td>
+                                <td class="carts-item"><span class="carts-item__quantity">${c.quantity}</span></td>
+                                <td class="carts-item">${c.product.price}₫</td>
+                                <td class="carts-item">${c.total}₫</td>
+                                <td class="carts-item carts-item__delete">
+                                    <a href="remove?index=${status.index}" class="carts-item__delete-active">
+                                      <i class="carts-item__delete-icon fa-solid fa-trash"></i>
+                                  </a>
+                                </td>
+                            </tr>
+                            </c:forEach>   
+                        </c:if>
                     </table>
                   </div>
                 </div>
                 <div class="grid__column-4">
                   <div class="carts-payment">
-                    <h3 class="carts-payment__heading">THANH TOÁN ĐƠN HÀNG CỦA BẠN</h3>
+                    <h3 class="carts-payment__heading">TỔNG CHI PHÍ CỦA BẠN</h3>
                     <div class="carts-payment__detail">
-                      <span class="carts-payment__detail-total">Thành tiền:	2.590.000₫</span>
-                      <span class="carts-payment__detail-totalcost">Tổng:	2.590.000₫</span>
+                      <span class="carts-payment__detail-total">Thành tiền:	${totalCost}₫</span>
+                      <span class="carts-payment__detail-totalcost">Tổng:	${totalCost}₫</span>
                     </div>
-                    <button class="carts-payment__detail-submit btn">THANH TOÁN</button>
+                    <button onclick="createOrder()" class="carts-payment__detail-submit btn">ĐẶT HÀNG</button>
                   </div>
                 </div>
             </div>
@@ -104,6 +94,7 @@
       <%@include file="/footer.jsp"%> 
     </div>
     <%@include file= "/modalLoginSignup.jsp"%>
-    <script src="./js/modalLoginSignup.js"></script>
+    <script src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/js/modalLoginSignup.js"></script>
+    <script src="/THUC_TAP_CO_SO_WEBSITE_BAN_GIAY/js/carts.js"></script>
 </body>
 </html>

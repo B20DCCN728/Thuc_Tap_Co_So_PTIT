@@ -57,6 +57,10 @@
   background-color: var(--primary-color);
 }
 
+.footer-header__right-submit:hover {
+    background-color: var(--primary-color-hover);
+}
+
 /* Body */
 .footer-container {
   justify-content: space-between;

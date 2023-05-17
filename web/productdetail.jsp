@@ -85,14 +85,14 @@
                             </div>
                             <!-- Add to cart -->
                             <div class="product-detail__cart">
-                                <a href="#" class="product-detail__cart-btn btn product-detail__cart-add">
+                                <button onclick="callAddToCart()"  class="product-detail__cart-btn btn product-detail__cart-add">
                                     <i class="product-detail__cart-icon fa-solid fa-cart-plus"></i>
                                     Thêm vào giỏ
-                                </a>
-                                <a href="#" class="product-detail__cart-btn btn product-detail__cart-order">
+                                </button>
+                                <button class="product-detail__cart-btn btn product-detail__cart-order">
                                     <i class="product-detail__cart-icon fa-solid fa-money-check-dollar"></i>
                                     Mua hàng ngay
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>  
@@ -120,8 +120,8 @@
                                 </c:forEach>
                             </div>
                             <div class="product-comment__me">
-                                <input type="text" class="product-comment__value" placeholder="Hãy nhập bình luận của bạn">
-                                <button class="product-comment__btn btn">Gửi bình luận</button>
+                                <input id="product-comment__value" type="text" class="product-comment__value" placeholder="Hãy nhập bình luận của bạn">
+                                <button id="btnSubmitComment" onclick="callSendComment()" class="product-comment__btn btn">Gửi bình luận</button>
                             </div>
                         </div>   
                     </div>     

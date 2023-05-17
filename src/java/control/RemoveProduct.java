@@ -1,20 +1,22 @@
 //Created by Campus
 package control;
 
-import DAO.ClientDAO;
-import DAO.DBConnection;
+import DAO.BoughtProductDAO;
+import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Client;
+import java.util.ArrayList;
 
-
-public class LoginControl extends HttpServlet {
+/**
+ *
+ * @author PC
+ */
+public class RemoveProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,20 +29,19 @@ public class LoginControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("text/html;charset=UTF-8");
+        int index = Integer.parseInt(request.getParameter("index"));
         
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");       
-        Client myAccount = new ClientDAO().checkLogin(username, password);  
-        
-        if(myAccount != null) {
-            HttpSession mySession = request.getSession();
-            mySession.setAttribute("myAccount", myAccount);
-            response.getWriter().write("success");
-        } else {
-            System.out.println("Not found account in database");
+        HttpSession mySession = request.getSession();
+        ArrayList<BoughtProductDAO> listCart = (ArrayList<BoughtProductDAO>) mySession.getAttribute("listCart");
+        for(int i = 0;i < listCart.size();i++) {
+            System.out.println(listCart.get(i));
         }
+        listCart.remove(index); 
+        mySession.setAttribute("listCart", listCart);
+        
+        response.sendRedirect("carts");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,7 +82,5 @@ public class LoginControl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
-    
+
 }

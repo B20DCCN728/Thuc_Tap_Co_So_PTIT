@@ -75,7 +75,7 @@
                       <a href="#" class="select-input__link">Giá: Thấp đến cao</a>
                     </li>
                     <li class="select-input__item">
-                      <a href="#" class="select-input__link">Giá: Cao đến thấp</a>
+                      <a href="/sort=ars" class="select-input__link">Giá: Cao đến thấp</a>
                     </li>
                   </ul> 
                 </div>

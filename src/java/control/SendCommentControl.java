@@ -1,8 +1,7 @@
 //Created by Campus
 package control;
 
-import DAO.ClientDAO;
-import DAO.DBConnection;
+import DAO.CommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,9 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Client;
+import model.Comment;
 
-
-public class LoginControl extends HttpServlet {
+/**
+ *
+ * @author PC
+ */
+public class SendCommentControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,17 +33,25 @@ public class LoginControl extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");       
-        Client myAccount = new ClientDAO().checkLogin(username, password);  
-        
+        HttpSession mySession = request.getSession();
+        Client myAccount = (Client) mySession.getAttribute("myAccount");
         if(myAccount != null) {
-            HttpSession mySession = request.getSession();
-            mySession.setAttribute("myAccount", myAccount);
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            String cmt = request.getParameter("cmt");
+            Comment comment = new Comment();
+            comment.setClientID(myAccount.getId());
+            comment.setProductID(productID);
+            comment.setTitle(cmt);
+
+            CommentDAO commentDAO = new CommentDAO();
+            commentDAO.addComment(comment);
+
             response.getWriter().write("success");
-        } else {
-            System.out.println("Not found account in database");
         }
+        else {
+            response.getWriter().write("error");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,7 +92,5 @@ public class LoginControl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
-    
+
 }

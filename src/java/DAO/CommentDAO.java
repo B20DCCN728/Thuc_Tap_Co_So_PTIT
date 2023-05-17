@@ -48,4 +48,20 @@ public class CommentDAO {
         }        
         return listComment;
     } 
+    
+    public void addComment(Comment comment) {
+        String query = "INSERT INTO [Thuc_Tap_Co_So].[dbo].[tblComments] VALUES (?, ?, GETDATE(), ?);";
+        
+        try {
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setInt(1, comment.getProductID());
+            preS.setInt(2, comment.getClientID());
+            preS.setString(3, comment.getTitle());
+            preS.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }     
+    }
 }
