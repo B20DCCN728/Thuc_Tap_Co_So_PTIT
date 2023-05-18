@@ -202,7 +202,134 @@ public class ProductDAO {
         return listProduct;
     }
     
-    public ArrayList<Product> sortProduct(ArrayList<Product> listProduct) {
+    public ArrayList<Product> sortProductByASC() {
+        ArrayList<Product> listProduct = new ArrayList<>();
+        String query = "SELECT * FROM dbo.tblProducts ORDER BY price ASC;";
+        
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listProduct;
+    }
+    public ArrayList<Product> sortProductByDESC() {
+        ArrayList<Product> listProduct = new ArrayList<>();
+        String query = "SELECT * FROM dbo.tblProducts ORDER BY price DESC;";
+        
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listProduct;
+    }  
+    
+    public ArrayList<Product> searchProductSortByASC(String productName) {
+        ArrayList<Product> listProduct = new ArrayList<>();
+//        String query = "SELECT * FROM tblProducts WHERE name LIKE ? ORDER BY price ASC";
+        String query = "SELECT * FROM tblProducts WHERE name LIKE ? ORDER BY price ASC;";
+        
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setString(1, "%" + productName + "%");
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listProduct;
+    }
+
+    public ArrayList<Product> searchProductSortByDESC(String productName) {
+    ArrayList<Product> listProduct = new ArrayList<>();
+//        String query = "SELECT * FROM tblProducts WHERE name LIKE ? ORDER BY price ASC";
+    String query = "SELECT * FROM tblProducts WHERE name LIKE ? ORDER BY price DESC;";
+        
+    try {
+        CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setString(1, "%" + productName + "%");
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return listProduct;
     }
     

@@ -72,10 +72,10 @@
                   <!-- List option -->
                   <ul class="select-input__list">
                     <li class="select-input__item">
-                      <a href="#" class="select-input__link">Giá: Thấp đến cao</a>
+                      <a href="${sevlet}?sortBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
                     </li>
                     <li class="select-input__item">
-                      <a href="/sort=ars" class="select-input__link">Giá: Cao đến thấp</a>
+                      <a href="${sevlet}?sortBy=DESC" class="select-input__link">Giá: Cao đến thấp</a>
                     </li>
                   </ul> 
                 </div>

@@ -220,3 +220,7 @@
     background-color: var(--primary-color);
 }
 
+.product-comment__btn:hover {
+    background-color: var(--primary-color-hover);
+}
+

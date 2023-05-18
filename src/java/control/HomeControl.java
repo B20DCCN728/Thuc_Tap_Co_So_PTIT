@@ -22,9 +22,24 @@ public class HomeControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ArrayList<Product> listProduct = new ProductDAO().getAllProducts();
+        //ArrayList<Product> listProduct = new ProductDAO().getAllProducts();
+        ArrayList<Product> listProduct = null;
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
         
+        String sortBy = request.getParameter("sortBy");
+        if(sortBy != null) {
+            if(sortBy.equals("ASC")) {
+                listProduct = new ProductDAO().sortProductByASC();
+            } 
+            if(sortBy.equals("DESC")) {
+                listProduct = new ProductDAO().sortProductByDESC();
+            }
+        }
+        else {
+           listProduct = new ProductDAO().getAllProducts();     
+        }
+        
+        request.setAttribute("sevlet", "HomeControl");
         request.setAttribute("listProduct", listProduct);
         request.setAttribute("listCategory", listCategory);
         

@@ -52,6 +52,10 @@
         <servlet-name>OrderControl</servlet-name>
         <servlet-class>control.client.checkout.OrderControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchControl</servlet-name>
+        <servlet-class>control.SearchControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeControl</servlet-name>
         <url-pattern>/HomeControl</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>OrderControl</servlet-name>
         <url-pattern>/orders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchControl</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

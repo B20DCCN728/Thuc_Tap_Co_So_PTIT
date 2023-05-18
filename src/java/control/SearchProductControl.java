@@ -23,9 +23,27 @@ public class SearchProductControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String searchContent = request.getParameter("searchContent").trim();
-        ArrayList<Product> listProduct = new ProductDAO().searchProduct(searchContent);
-        request.setAttribute("listProduct", listProduct);        
+        
+        ArrayList<Product> listProduct = null;
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
+        
+        String sortBy = request.getParameter("sortBy");
+        if(sortBy != null) {
+            if(sortBy.equals("ASC")) {
+                listProduct = new ProductDAO().searchProductSortByASC(searchContent);
+            } 
+            if(sortBy.equals("DESC")) {
+                listProduct = new ProductDAO().searchProductSortByDESC(searchContent);
+            }
+        }
+        else {
+           listProduct = new ProductDAO().searchProduct(searchContent);    
+        }
+        
+        request.setAttribute("sevlet", "SearchProductControl");
+        
+        
+        request.setAttribute("listProduct", listProduct);        
         request.setAttribute("listCategory", listCategory);       
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
