@@ -4,7 +4,6 @@ package control;
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
