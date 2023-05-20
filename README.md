@@ -1,4 +1,4 @@
-# Thực tập cơ sở PTIT cô Liên
+# Thực tập cơ sở PTIT
 # Làm Website bán hàng cơ bản dùng:
 
  - Front-end: HTML, CSS, JavaScript cơ bản 
