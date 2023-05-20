@@ -1,5 +1,9 @@
-# Thuc_Tap_Co_So_PTIT
-## Website bán giày cơ bản
+# Thực tập cơ sở PTIT cô Liên
+# Làm Website bán giày cơ bản dùng:
+
+ - Front-end: HTML, CSS, JavaScript cơ bản 
+ - Back-end: Java Servlet cơ bản
+ 
 ## Phân chia chức năng
 
 Website phân chia thành các thành phần con để quản lý chức năng tương ứng. Dưới đây là một ví dụ cụ thể về cách phân chia các module bổ sung trong một trang web bán hàng đơn giản bằng Java Servlet:
