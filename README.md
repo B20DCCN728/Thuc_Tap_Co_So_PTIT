@@ -1,5 +1,5 @@
 # Thực tập cơ sở PTIT cô Liên
-# Làm Website bán giày cơ bản dùng:
+# Làm Website bán hàng cơ bản dùng:
 
  - Front-end: HTML, CSS, JavaScript cơ bản 
  - Back-end: Java Servlet cơ bản
