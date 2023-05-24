@@ -22,10 +22,22 @@ public class SearchProductControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String searchContent = request.getParameter("searchContent").trim();
         
         ArrayList<Product> listProduct = null;
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
+        
+        String searchContent = request.getParameter("searchContent").trim();
+        String page = request.getParameter("page"); //null or current page
+        int totalPage = new ProductDAO().getQuantityOfPages(searchContent);
+        
+        int index = 1;
+        if(page != null) {
+            try {
+                index = Integer.parseInt(page);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }       
+        }
         
         String sortBy = request.getParameter("sortBy");
         if(sortBy != null) {
@@ -41,10 +53,11 @@ public class SearchProductControl extends HttpServlet {
         }
         
         request.setAttribute("sevlet", "SearchProductControl");
+        request.setAttribute("index", index);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("listProduct", listProduct);
+        request.setAttribute("listCategory", listCategory);
         
-        
-        request.setAttribute("listProduct", listProduct);        
-        request.setAttribute("listCategory", listCategory);       
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

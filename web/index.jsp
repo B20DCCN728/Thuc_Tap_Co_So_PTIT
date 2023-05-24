@@ -72,26 +72,132 @@
                   <!-- List option -->
                   <ul class="select-input__list">
                     <li class="select-input__item">
-                      <a href="${sevlet}?sortBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
+                      <a href="${sevlet}?sortBy=price&orderBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
                     </li>
                     <li class="select-input__item">
-                      <a href="${sevlet}?sortBy=DESC" class="select-input__link">Giá: Cao đến thấp</a>
+                      <a href="${sevlet}?sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao đến thấp</a>
                     </li>
                   </ul> 
                 </div>
 
                 <div class="home-filter__page">
                   <span class="home-filter__page-num">
-                    <span class="home-filter__page-current">1</span>/14
+                    <span class="home-filter__page-current">${index}</span>/${totalPage}
                   </span>
 
                   <div class="home-filter__page-control">
-                    <a href="" class="home-filter__page-btn home-filter__page-btn--disable">
+                    <!--<a href="${sevlet}?sortBy=${sortBy}&orderBy=${orderBy}&page=${index - 1}" class="home-filter__page-btn ${index == 1 ? "home-filter__page-btn--disable" : ""}">
                       <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
-                    </a>
-                    <a href="" class="home-filter__page-btn">
+                    </a>-->
+<!--                    Left-->
+                    <c:choose>
+                        
+                        <c:when test = "${index <= 1}">
+                         <div class="home-filter__page-btn home-filter__page-btn--disable">
+                           <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                         </div>
+                        </c:when>
+                        
+                        <c:when test="${sevlet.equals('SearchControl')}">
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?searchContent=${searchContent}&page=${index - 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?searchContent=${searchContent}&sortBy=${sortBy}&orderBy=${orderBy}&page=${index - 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>    
+                            </c:if>
+                        </c:when>            
+
+                        <c:when test="${sevlet.equals('CategoryControl')}">
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?categoryID=${categoryID}&page=${index - 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?categoryID=${categoryID}&sortBy=${sortBy}&orderBy=${orderBy}&page=${index - 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>    
+                            </c:if>
+                        </c:when>    
+                        
+                        <c:otherwise>
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?page=${index - 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?sortBy=${sortBy}&orderBy=${orderBy}&page=${index - 1}" class="home-filter__page-btn">
+                                  <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
+                                </a>
+                            </c:if>
+                        </c:otherwise>
+                        
+                    </c:choose>
+                    
+<!--                    Right-->
+                    <c:choose>
+
+                       <c:when test = "${index >= totalPage}">
+                        <div class="home-filter__page-btn home-filter__page-btn--disable">
+                          <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                        </div>
+                       </c:when>
+                        
+                        <c:when test="${sevlet.equals('SearchControl')}">
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?searchContent=${searchContent}&page=${index + 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?searchContent=${searchContent}&sortBy=${sortBy}&orderBy=${orderBy}&page=${index + 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>    
+                            </c:if>
+                        </c:when>            
+
+                        <c:when test="${sevlet.equals('CategoryControl')}">
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?categoryID=${categoryID}&page=${index + 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?categoryID=${categoryID}&sortBy=${sortBy}&orderBy=${orderBy}&page=${index + 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>    
+                            </c:if>
+                        </c:when>    
+                        
+                        <c:otherwise>
+                            <c:if test="${sortBy == null}">
+                                <a href="${sevlet}?page=${index + 1}" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>    
+                            </c:if>
+                            
+                            <c:if test="${sortBy != null}">
+                                <a href="${sevlet}?sortBy=${sortBy}&orderBy=${orderBy}&page=${index + 1}" class="home-filter__page-btn">
+                                  <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
+                                </a>
+                            </c:if>
+                        </c:otherwise>
+                        
+                    </c:choose>
+                      
+                    <!--<a href="${sevlet}?sortBy=${sortBy}&orderBy=${orderBy}&page=${index + 1}" class="home-filter__page-btn">
                       <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>
-                    </a>
+                    </a>-->
                   </div>
                 </div>
               </div>

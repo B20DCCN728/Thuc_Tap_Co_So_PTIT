@@ -25,20 +25,41 @@ public class HomeControl extends HttpServlet {
         ArrayList<Product> listProduct = null;
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
         
-        String sortBy = request.getParameter("sortBy");
-        if(sortBy != null) {
-            if(sortBy.equals("ASC")) {
-                listProduct = new ProductDAO().sortProductByASC();
-            } 
-            if(sortBy.equals("DESC")) {
-                listProduct = new ProductDAO().sortProductByDESC();
+        String page = request.getParameter("page"); //null or current page
+        int totalPage = new ProductDAO().getQuantityOfPages();
+        String sortBy = request.getParameter("sortBy"); //price or name
+        
+        int index = 1;
+        if(page != null) {
+            try {
+                index = Integer.parseInt(page);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }       
+        }
+                
+        if(sortBy != null&&(sortBy.equals("price"))) {
+            String orderBy = request.getParameter("orderBy");     
+            request.setAttribute("sortBy", sortBy);
+            request.setAttribute("orderBy", orderBy);
+            if(orderBy.equals("ASC")) {
+                listProduct = new ProductDAO().sortProductsByPriceOrderByASCIndexOf(index);
+            }
+            else if(orderBy.equals("DESC")) {
+                listProduct = new ProductDAO().sortProductsByPriceOrderByDESCIndexOf(index);
+            }
+            else {
+                listProduct = new ProductDAO().getProductsIndexOf(index);
             }
         }
         else {
-           listProduct = new ProductDAO().getAllProducts();     
+            listProduct = new ProductDAO().getProductsIndexOf(index);
         }
         
+        
         request.setAttribute("sevlet", "HomeControl");
+        request.setAttribute("index", index);
+        request.setAttribute("totalPage", totalPage);
         request.setAttribute("listProduct", listProduct);
         request.setAttribute("listCategory", listCategory);
         
