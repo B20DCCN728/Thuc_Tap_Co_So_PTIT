@@ -29,6 +29,7 @@ public class SearchProductControl extends HttpServlet {
         String searchContent = request.getParameter("searchContent").trim();
         String page = request.getParameter("page"); //null or current page
         int totalPage = new ProductDAO().getQuantityOfPages(searchContent);
+        String sortBy = request.getParameter("sortBy"); //price or name
         
         int index = 1;
         if(page != null) {
@@ -39,20 +40,26 @@ public class SearchProductControl extends HttpServlet {
             }       
         }
         
-        String sortBy = request.getParameter("sortBy");
-        if(sortBy != null) {
-            if(sortBy.equals("ASC")) {
-                listProduct = new ProductDAO().searchProductSortByASC(searchContent);
-            } 
-            if(sortBy.equals("DESC")) {
-                listProduct = new ProductDAO().searchProductSortByDESC(searchContent);
+        if(sortBy != null&&(sortBy.equals("price"))) {
+            String orderBy = request.getParameter("orderBy");     
+            request.setAttribute("sortBy", sortBy);
+            request.setAttribute("orderBy", orderBy);
+            if(orderBy.equals("ASC")) {
+                listProduct = new ProductDAO().searchProductsByPriceOrderByASCIndexOf(index, searchContent);
+            }
+            else if(orderBy.equals("DESC")) {
+                listProduct = new ProductDAO().searchProductsByPriceOrderByDESCIndexOf(index, searchContent);
+            }
+            else {
+                listProduct = new ProductDAO().searchProductsIndexOf(index, searchContent);
             }
         }
         else {
-           listProduct = new ProductDAO().searchProduct(searchContent);    
+            listProduct = new ProductDAO().searchProductsIndexOf(index, searchContent);
         }
         
         request.setAttribute("sevlet", "SearchProductControl");
+        request.setAttribute("searchContent", searchContent);
         request.setAttribute("index", index);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("listProduct", listProduct);

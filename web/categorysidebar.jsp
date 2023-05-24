@@ -20,7 +20,7 @@
                     <a href="#" class="category-link">Adidas</a>
                   </li>-->
                   <c:forEach items="${listCategory}" var="o">
-                      <li class="category-item ${cateID == o.id ? "category-link--active" : ""}">
+                    <li class="category-item ${categoryID == o.id ? "category-link--active" : ""}">
                       <a href="CategoryControl?categoryID=${o.id}" class="category-link">${o.name}</a>
                     </li>
                   </c:forEach>

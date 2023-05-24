@@ -72,10 +72,39 @@
                   <!-- List option -->
                   <ul class="select-input__list">
                     <li class="select-input__item">
-                      <a href="${sevlet}?sortBy=price&orderBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
+                        <!--choose sort type - ASC -->
+                        <c:choose>
+                            <c:when test="${sevlet.equals('SearchProductControl')}">
+                                <a href="${sevlet}?searchContent=${searchContent}&sortBy=price&orderBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
+                            </c:when>
+                            
+                            <c:when test="${sevlet.equals('CategoryControl')}">
+                                <a href="${sevlet}?categoryID=${categoryID}&sortBy=price&orderBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
+                            </c:when>
+                                                               
+                            <c:otherwise>
+                                <a href="${sevlet}?sortBy=price&orderBy=ASC" class="select-input__link">Giá: Thấp đến cao</a>
+                            </c:otherwise>
+                        </c:choose>
                     </li>
                     <li class="select-input__item">
-                      <a href="${sevlet}?sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao đến thấp</a>
+                        <!--choose sort type - DESC -->
+                        <c:choose>
+                            <c:when test="${sevlet.equals('SearchProductControl')}">
+                                <a href="${sevlet}?searchContent=${searchContent}&sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao xuống thấp</a>
+                            </c:when>
+
+                            <c:when test="${sevlet.equals('CategoryControl')}">
+                                <a href="${sevlet}?categoryID=${categoryID}&sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao xuống thấp</a>
+                            </c:when>  
+                                
+                            <c:otherwise>
+                                <a href="${sevlet}?sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao xuống thấp</a>
+                            </c:otherwise>
+                        </c:choose>
+                                
+                        <!--<a href="${sevlet}?sortBy=price&orderBy=DESC" class="select-input__link">Giá: Cao đến thấp</a>-->
+                      
                     </li>
                   </ul> 
                 </div>
@@ -98,7 +127,7 @@
                          </div>
                         </c:when>
                         
-                        <c:when test="${sevlet.equals('SearchControl')}">
+                        <c:when test="${sevlet.equals('SearchProductControl')}">
                             <c:if test="${sortBy == null}">
                                 <a href="${sevlet}?searchContent=${searchContent}&page=${index - 1}" class="home-filter__page-btn">
                                     <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-left"></i>
@@ -151,7 +180,7 @@
                         </div>
                        </c:when>
                         
-                        <c:when test="${sevlet.equals('SearchControl')}">
+                        <c:when test="${sevlet.equals('SearchProductControl')}">
                             <c:if test="${sortBy == null}">
                                 <a href="${sevlet}?searchContent=${searchContent}&page=${index + 1}" class="home-filter__page-btn">
                                     <i class="home-filter__page-icon fa-sharp fa-solid fa-chevron-right"></i>

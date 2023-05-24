@@ -22,18 +22,50 @@ public class CategoryControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/index.jsp";
-        int cateID = Integer.parseInt(request.getParameter("categoryID"));
-        
-        ArrayList<Product> listProduct = new ProductDAO().getAllProductsByCateID(cateID);
-        
+
+        ArrayList<Product> listProduct = null;
         ArrayList<Category> listCategory = new CategoryDAO().getAllCategory();
         
+        int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+        String page = request.getParameter("page"); //null or current page
+        int totalPage = new ProductDAO().getQuantityOfPages(categoryID);
+        String sortBy = request.getParameter("sortBy"); //price or name
+        
+        int index = 1;
+        if(page != null) {
+            try {
+                index = Integer.parseInt(page);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }       
+        }
+        
+        if(sortBy != null&&(sortBy.equals("price"))) {
+            String orderBy = request.getParameter("orderBy");     
+            request.setAttribute("sortBy", sortBy);
+            request.setAttribute("orderBy", orderBy);
+            if(orderBy.equals("ASC")) {
+                listProduct = new ProductDAO().getProductsByCateIDSortByPriceOrderByASCIndexOf(index, categoryID);
+            }
+            else if(orderBy.equals("DESC")) {
+                listProduct = new ProductDAO().getProductsByCateIDSortByPriceOrderByDESCIndexOf(index, categoryID);
+            }
+            else {
+                listProduct = new ProductDAO().getProductsByCateIDIndexOf(index, categoryID);
+            }
+        }
+        else {
+            listProduct = new ProductDAO().getAllProductsByCateID(categoryID);
+        }
+        
+        request.setAttribute("sevlet", "CategoryControl");
+        request.setAttribute("index", index);
+        request.setAttribute("totalPage", totalPage);
         request.setAttribute("listProduct", listProduct);
         request.setAttribute("listCategory", listCategory);
-        request.setAttribute("cateID", cateID);
+        request.setAttribute("categoryID", categoryID);
         
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

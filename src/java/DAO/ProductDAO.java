@@ -389,6 +389,35 @@ public class ProductDAO {
         return quantity;
     }
     
+    public int getQuantityOfPages(int categoryID) { 
+        int quantity = 0;
+        int totalProductsInPage = 20;
+        //String query = "SELECT * FROM tblProducts WHERE name LIKE ? ORDER BY price ASC";
+    
+        String query = "SELECT COUNT(*) AS quantity FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE cateID = ?;";
+        
+        try {
+            //CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setInt(1, categoryID);
+            result = preS.executeQuery();
+            
+            if(result.next()) {
+                quantity = result.getInt(1);
+                return (quantity % totalProductsInPage == 0) 
+                        ? (quantity / totalProductsInPage) 
+                        : (quantity / totalProductsInPage) + 1;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return quantity;
+    }
+    
+    
     public ArrayList<Product> sortProductsByPriceOrderByASCIndexOf(int index) {
         ArrayList<Product> listProduct = new ArrayList<>();
         int totalProductsInPage = 20;
@@ -546,4 +575,200 @@ public class ProductDAO {
         return listProduct;
     }
     
+    public ArrayList<Product> searchProductsByPriceOrderByASCIndexOf(int index, String keyword) {
+        
+        ArrayList<Product> listProduct = new ArrayList<>();
+        int totalProductsInPage = 20;
+        
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE name LIKE ? ORDER BY price ASC\n"
+                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setString(1, "%" + keyword + "%");
+            preS.setInt(2, (index - 1) * totalProductsInPage);
+            preS.setInt(3, totalProductsInPage);
+
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listProduct;
+    }
+
+    public ArrayList<Product> searchProductsByPriceOrderByDESCIndexOf(int index, String keyword) {
+        
+        ArrayList<Product> listProduct = new ArrayList<>();
+        int totalProductsInPage = 20;
+        
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE name LIKE ? ORDER BY price DESC\n"
+                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setString(1, "%" + keyword + "%");
+            preS.setInt(2, (index - 1) * totalProductsInPage);
+            preS.setInt(3, totalProductsInPage);
+
+            result = preS.executeQuery();
+            while(result.next()) {
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listProduct;
+    }
+    
+    public ArrayList<Product> getProductsByCateIDIndexOf(int index, int cateID){
+        ArrayList<Product> listProduct = new ArrayList<>();
+        int totalProductsInPage = 20;
+        
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE cateID = ? ORDER BY id ASC\n"
+                       + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+            
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setInt(1, cateID);
+            preS.setInt(2, (index - 1) * totalProductsInPage);
+            preS.setInt(3, totalProductsInPage);
+
+            result = preS.executeQuery();
+            while(result.next()) {
+                //add list items into ArrayList             
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return listProduct;
+    }
+    
+    public ArrayList<Product> getProductsByCateIDSortByPriceOrderByASCIndexOf(int index, int cateID){
+        ArrayList<Product> listProduct = new ArrayList<>();
+        int totalProductsInPage = 20;
+        
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE cateID = ? ORDER BY price ASC\n"
+                       + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+            
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setInt(1, cateID);
+            preS.setInt(2, (index - 1) * totalProductsInPage);
+            preS.setInt(3, totalProductsInPage);
+
+            result = preS.executeQuery();
+            while(result.next()) {
+                //add list items into ArrayList             
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return listProduct;
+    }
+    
+    public ArrayList<Product> getProductsByCateIDSortByPriceOrderByDESCIndexOf(int index, int cateID){
+        ArrayList<Product> listProduct = new ArrayList<>();
+        int totalProductsInPage = 20;
+        
+        String query = "SELECT * FROM [Thuc_Tap_Co_So].[dbo].[tblProducts] WHERE cateID = ? ORDER BY price DESC\n"
+                       + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+            
+        try {
+            CategoryDAO categoryDAO = new CategoryDAO();
+            connection = new DBConnection().getConnection();
+            preS = connection.prepareStatement(query);
+            preS.setInt(1, cateID);
+            preS.setInt(2, (index - 1) * totalProductsInPage);
+            preS.setInt(3, totalProductsInPage);
+
+            result = preS.executeQuery();
+            while(result.next()) {
+                //add list items into ArrayList             
+                listProduct.add(new Product(
+                    result.getInt(1), 
+                    result.getString(2), 
+                    result.getString(3), 
+                    result.getString(4), 
+                    result.getString(5), 
+                    result.getString(6), 
+                    result.getFloat(7), 
+                    result.getString(8), 
+                    categoryDAO.getCategoryByID(result.getInt(9)),
+                    result.getInt(10)
+                ));
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return listProduct;
+    }
 }

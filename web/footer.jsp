@@ -95,7 +95,7 @@
 
           </div> 
           <div class="grid__row footer-bottom">
-            <span class="footer-bottom__left">Copyright © 2023 Campus PTIT.,JSC</span>
+            <span class="footer-bottom__left">Copyright © 2023 Campus PTIT, PMC WAGNER </span>
             <div class="footer-bottom__right">
               <i class="footer-bottom__icon fa-brands fa-cc-visa"></i>
               <i class="footer-bottom__icon fa-brands fa-cc-paypal"></i>
