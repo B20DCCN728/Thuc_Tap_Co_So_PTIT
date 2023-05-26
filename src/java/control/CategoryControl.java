@@ -55,7 +55,7 @@ public class CategoryControl extends HttpServlet {
             }
         }
         else {
-            listProduct = new ProductDAO().getAllProductsByCateID(categoryID);
+            listProduct = new ProductDAO().getProductsByCateIDIndexOf(index, categoryID);
         }
         
         request.setAttribute("sevlet", "CategoryControl");
